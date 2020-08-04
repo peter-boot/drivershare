@@ -4,6 +4,7 @@
 // const requireLogin = require('../middlewares/requireLogin');
 const sd = require('./speaker_data');
 
+
 module.exports = app => {
 	
 	app.get('/speakers', async (req, res) => {
