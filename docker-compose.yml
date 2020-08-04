@@ -1,0 +1,35 @@
+version: '3'
+services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
+    logging:
+        driver: none
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - RELEASE_STAGE=10
+      - COOKIE_KEY=a6k993newkeyasdfadsfuiyouiyouibnndu
+      - MYSQL_HOST=172.17.0.1
+      - MYSQL_DATABASE=apview
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true  

@@ -1,0 +1,31 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t adg2020/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    -  docker run -e CI=true adg2020/react-test npm test
+after_success:
+    - docker build -t adg2020/accessplus-client-test ./client
+    - docker build -t adg2020/accessplus-nginx-test ./nginx
+    - docker build -t adg2020/accessplus-server-test ./server
+    # Log in to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # Take those images & push them to docker hub
+    - docker push adg2020/accessplus-client-test
+    - docker push adg2020/accessplus-nginx-test
+    - docker push adg2020/accessplus-server-test
+deploy:
+    provider: elasticbeanstak
+    region: "ap-southeast-2"
+    app: "AccessPlus-CD-Dev"
+    # DEV TESTING
+    env: "AccessplusCdTest-env"
+    bucket_name: "elasticbeanstalk-test-ap-southeast-2-728507362135"
+    bucket_path: "docker-dev"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY_ADG
+    secret_access_key: $AWS_SECRET_KEY_ADG

@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+      {
+        "name": "client",
+        "image": "adg2020/accessplus-client-test",
+        "hostname": "client",
+        "essential": false,
+        "memory": 128
+      },
+      {
+        "name": "server",
+        "image": "adg2020/accessplus-server-test",
+        "hostname": "api",
+        "essential": true,
+        "memory": 128
+      },
+      {
+        "name": "nginx",
+        "image": "adg2020/accessplus-nginx-test",
+        "hostname": "nginx",
+        "essential": true,
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "containerPort": 80
+          }
+        ],
+        "links": ["client", "server"],
+        "memory": 128
+      }
+    ],
+    "authentication": {
+      "bucket": "elasticbeanstalk-test-ap-southeast-2-728507362135",
+      "key": "dockercfg"
+    }
+  }

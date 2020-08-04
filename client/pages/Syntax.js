@@ -1,0 +1,18 @@
+import React, { useEffect } from "react";
+
+const Syntax = () => {
+
+    const [checkBoxValue, setCheckBoxValue] = useState(false);
+
+    useEffect(() => {
+        console.log('in useEffect');
+        return () => {
+            console.log('in useEffect Cleanup');
+        }
+    }, [checkBoxValue])
+
+    return <div>Syntax
+    </div>
+};
+
+export default Syntax;
