@@ -2,7 +2,6 @@
 // const qs = require('qs');
 // const Q = require('q');
 // const requireLogin = require('../middlewares/requireLogin');
-// const { getDoughnutSeries } = require('../functions.js');
 const sd = require('./speaker_data');
 
 module.exports = app => {
