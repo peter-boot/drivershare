@@ -14,14 +14,8 @@ import useAxiosFetch from "./useAxiosFetch";
 
 const Speakers = ({ }) => {
 
-  //const { data, isLoading, hasErrored, errorMessage, updateDataRecord
-  //} = useAxiosFetch("http://172.16.0.0:3050/api/speakers", []);
-
-  //const { data, isLoading, hasErrored, errorMessage, updateDataRecord
-  // } = useAxiosFetch("http://172.16.0.0:4000/speakers", []);
-
   //const url = '/api/system/settings/' + reqType + '/' + qs.stringify(searchValues);
-  const url = '/api/speakers/'
+  const url = '/api/speakers/';
    const { data, isLoading, hasErrored, errorMessage, updateDataRecord
    } = useAxiosFetch(url, []);
 

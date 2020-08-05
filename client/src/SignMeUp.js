@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-//import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { ConfigContext } from "./App";
-import { inspect } from 'util';
+//import { inspect } from 'util';
 
 const SignMeUp = ({ signupCallback }) => {
   useEffect(() => {
@@ -40,10 +39,7 @@ const SignMeUp = ({ signupCallback }) => {
   }
 
   const buttonText = sendProcessing ? "processing..." : "Get Updates";
-
-  //console.log('src/SignMeUp ConfigContext=%s', JSON.stringify(ConfigContext, null, 2))
-  //console.log('\nsrc/SignMeUp ConfigContext=%s', inspect(ConfigContext));
-  //console.log("src/SignMeUp ConfigContext.showSignMeUp=%s", ConfigContext.showSignMeUp);
+  //console.log('src/SignMeUp context=%s', JSON.stringify(context, null, 2))
 
   if (context.loggedInUserEmail) {
     return (

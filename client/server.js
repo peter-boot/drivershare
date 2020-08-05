@@ -28,6 +28,7 @@ passport.deserializeUser(function(userInfo, cb) {
   cb(null, userInfo);
 });
 
+
 app1
   .prepare()
   .then(() => {
@@ -48,15 +49,34 @@ app1
     app.use(passport.initialize());
     app.use(passport.session());
 
+    /*
+    app.post('/login', function (req, res, next) {
+      try {
+        //console.log('/login req.body=%s', JSON.stringify(req.body, null, 2));
+        console.log('/login req=%s', JSON.stringify(req, null, 2));
+    
+        res.json({});
+        //setTimeout((function() {res.json({})}), 2000);
+    
+      } catch (error) {
+        console.error('login error=', error);
+        res.status(422).send(error);
+      }
+    });
+    */
+    
     app.post(
       "/login",
       passport.authenticate("local", { failureRedirect: "/login" }),
       function(req, res) {
+        console.log("app.post(/login)");
         res.redirect("/");
       }
     );
+    
 
     app.get("/logout", (req, res) => {
+      console.log("app.get(/logout)");
       req.logout();
       res.redirect("/");
     });

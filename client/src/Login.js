@@ -7,6 +7,8 @@ import { Menu } from "../src/Menu";
 const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //const url = '/api/login';
+  const url = '/login';
 
   return (
     <div>
@@ -15,7 +17,7 @@ const Index = () => {
 
       <div className="container margintopbottom">
         <div className="row">
-          <form action="/login" method="POST">
+          <form action={url} method="POST">
             <div className="mb-3">
               <h3>Login</h3>
               <input
