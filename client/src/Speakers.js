@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useContext, useReducer, useCallback, useMemo } from "react";
 import axios from "axios";
-
-//import "bootstrap/dist/css/bootstrap.min.css";
-//import "../static/site.css";
-
 import { ConfigContext } from "./App";
 import { Header } from "../src/Header";
 import { Menu } from "../src/Menu";
@@ -16,8 +12,8 @@ const Speakers = ({ }) => {
 
   //const url = '/api/system/settings/' + reqType + '/' + qs.stringify(searchValues);
   const url = '/api/speakers/';
-   const { data, isLoading, hasErrored, errorMessage, updateDataRecord
-   } = useAxiosFetch(url, []);
+  const { data, isLoading, hasErrored, errorMessage, updateDataRecord
+  } = useAxiosFetch(url, []);
 
   const [speakingSaturday, setSpeakingSaturday] = useState(true);
   const [speakingSunday, setSpeakingSunday] = useState(true);
@@ -32,7 +28,7 @@ const Speakers = ({ }) => {
   const heartFavoriteHandler = useCallback((e, speakerRec) => {
     e.preventDefault();
     const toggledRec = { ...speakerRec, favorite: !speakerRec.favorite };
-    axios.put(`http://172.16.0.0:4000/speakers/${speakerRec.id}`, toggledRec)
+    axios.put(`/api/speakers/${speakerRec.id}`, toggledRec)
       .then(function (response) {
         updateDataRecord(toggledRec);
       })

@@ -5,6 +5,9 @@ const cors = require('cors');
 const app = express();
 const port = 5000;
 
+app.use(require("cookie-parser")());
+app.use(require("body-parser").urlencoded({ extended: true }));
+
 // route handlers
 require('./routes/speakerRoutes')(app);
 

@@ -1,8 +1,6 @@
 import React, { useState, useReducer } from "react";
 import useEmailValidation from "./useEmailValidation";
 import useInterval from "./useInterval";
-//import "bootstrap/dist/css/bootstrap.min.css";
-//import "../static/site.css";
 
 function EmailValidatingForm() {
   const { count, email, setEmail, emailValid } = useEmailValidation(10);

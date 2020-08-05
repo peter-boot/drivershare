@@ -1,15 +1,13 @@
 const express = require("express");
 const next = require("next");
-
-var passport = require("passport");
-var Strategy = require("passport-local").Strategy;
-
+const passport = require("passport");
+const Strategy = require("passport-local").Strategy;
 const dev = process.env.NODE_ENV !== "production";
 const app1 = next({ dev });
 const handle = app1.getRequestHandler();
 
 passport.use(
-  new Strategy(function(username, password, done) {
+  new Strategy(function (username, password, done) {
     function validateUser(username, password) {
       return username === password;
     }
@@ -20,11 +18,12 @@ passport.use(
   })
 );
 
-passport.serializeUser(function(userInfo, done) {
+passport.serializeUser(function (userInfo, done) {
+  console.log(`*** passport.serializeUser`);
   done(null, userInfo);
 });
 
-passport.deserializeUser(function(userInfo, cb) {
+passport.deserializeUser(function (userInfo, cb) {
   cb(null, userInfo);
 });
 
@@ -49,31 +48,13 @@ app1
     app.use(passport.initialize());
     app.use(passport.session());
 
-    /*
-    app.post('/login', function (req, res, next) {
-      try {
-        //console.log('/login req.body=%s', JSON.stringify(req.body, null, 2));
-        console.log('/login req=%s', JSON.stringify(req, null, 2));
-    
-        res.json({});
-        //setTimeout((function() {res.json({})}), 2000);
-    
-      } catch (error) {
-        console.error('login error=', error);
-        res.status(422).send(error);
-      }
-    });
-    */
-    
     app.post(
       "/login",
       passport.authenticate("local", { failureRedirect: "/login" }),
-      function(req, res) {
-        console.log("app.post(/login)");
+      function (req, res) {
         res.redirect("/");
       }
     );
-    
 
     app.get("/logout", (req, res) => {
       console.log("app.get(/logout)");
@@ -88,7 +69,7 @@ app1
     app.listen(3000, err => {
       if (err) throw err;
       console.log("> Ready on http://localhost:3000");
-    }); 
+    });
   })
   .catch(ex => {
     console.error(ex.stack);

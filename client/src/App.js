@@ -15,7 +15,7 @@ const pageToShow = pageName => {
 const configValue = {
   showSignMeUp: true,
   showSpeakerSpeakingDays: true,
-  loggedInUserEmail: 'peter@gmail.com'
+  loggedInUserEmail: 'xxx@gmail.com'
 };
 
 const App = ({ pageName, userInfo }) => {
